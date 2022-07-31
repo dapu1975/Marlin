@@ -98,7 +98,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT 0
+#define SERIAL_PORT -1
 
 /**
  * Serial Port Baud Rate
@@ -119,8 +119,8 @@
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-//#define SERIAL_PORT_2 -1
-//#define BAUDRATE_2 250000   // Enable to override BAUDRATE
+#define SERIAL_PORT_2 0
+#define BAUDRATE_2 250000 // Enable to override BAUDRATE
 
 /**
  * Select a third serial port on the board to use for communication with the host.
@@ -608,7 +608,7 @@
 #define HEATER_4_MINTEMP 5
 #define HEATER_5_MINTEMP 5
 #define HEATER_6_MINTEMP 5
-#define HEATER_7_MINTEMP 5
+#define HEATER_7_MINTEMP 5Laser
 #define BED_MINTEMP 5
 #define CHAMBER_MINTEMP 5
 
@@ -844,8 +844,8 @@
  *
  * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
  */
-#define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 230
+//#define PREVENT_COLD_EXTRUSION
+//#define EXTRUDE_MINTEMP 230
 
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
@@ -1062,9 +1062,9 @@
 //#define USE_UMIN_PLUG
 //#define USE_VMIN_PLUG
 //#define USE_WMIN_PLUG
-//#define USE_XMAX_PLUG
+#define USE_XMAX_PLUG
 //#define USE_YMAX_PLUG
-//#define USE_ZMAX_PLUG
+#define USE_ZMAX_PLUG
 //#define USE_IMAX_PLUG
 //#define USE_JMAX_PLUG
 //#define USE_KMAX_PLUG
@@ -1132,9 +1132,9 @@
 #define U_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define V_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define W_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
+#define X_MAX_ENDSTOP_INVERTING true        // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define Z_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
+#define Z_MAX_ENDSTOP_INVERTING true        // Set to true to invert the logic of the endstop.
 #define I_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define J_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define K_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
@@ -1191,7 +1191,7 @@
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT \
   {                                 \
-    80, 80, 400, 500                \
+    40, 40, 200, 500                \
   }
 
 /**
@@ -1201,7 +1201,7 @@
  */
 #define DEFAULT_MAX_FEEDRATE \
   {                          \
-    300, 300, 5, 25          \
+    200, 200, 5, 25          \
   }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
@@ -1220,7 +1220,7 @@
  */
 #define DEFAULT_MAX_ACCELERATION \
   {                              \
-    3000, 3000, 100, 10000       \
+    1500, 1500, 100, 10000       \
   }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
@@ -1733,7 +1733,7 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
+#define INVERT_X_DIR true
 #define INVERT_Y_DIR true
 #define INVERT_Z_DIR false
 //#define INVERT_I_DIR false
@@ -2828,10 +2828,7 @@
 // Viki 2.0 or mini Viki with Graphic LCD
 // https://www.panucatt.com
 //
-//#define VIKI2
-//#define miniVIKI
-
-//
+//#define VIKI2#define ENABLE_AUTO_BED_LEVELING
 // Alfawise Ex8 printer LCD marked as WYH L12864 COG
 //
 //#define WYH_L12864
@@ -3352,17 +3349,17 @@
 #endif
 
 // Support for Adafruit NeoPixel LED driver
-//#define NEOPIXEL_LED
+#define NEOPIXEL_LEDfalse
 #if ENABLED(NEOPIXEL_LED)
-#define NEOPIXEL_TYPE NEO_GRBW // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc.
-                               // See https://github.com/adafruit/Adafruit_NeoPixel/blob/master/Adafruit_NeoPixel.h
-//#define NEOPIXEL_PIN                4 // LED driving pin
+#define NEOPIXEL_TYPE NEO_GRBW   // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc.
+                                 // See https://github.com/adafruit/Adafruit_NeoPixel/blob/master/Adafruit_NeoPixel.h
+#define NEOPIXEL_PIN EXP1_07_PIN // LED driving pin
 //#define NEOPIXEL2_TYPE  NEOPIXEL_TYPE
 //#define NEOPIXEL2_PIN               5
-#define NEOPIXEL_PIXELS 30      // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.)
+#define NEOPIXEL_PIXELS 8       // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.)
 #define NEOPIXEL_IS_SEQUENTIAL  // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
 #define NEOPIXEL_BRIGHTNESS 127 // Initial brightness (0-255)
-//#define NEOPIXEL_STARTUP_TEST         // Cycle through colors at startup
+#define NEOPIXEL_STARTUP_TEST   // Cycle through colors at startup
 
 // Support for second Adafruit NeoPixel LED driver controlled with M150 S1 ...
 //#define NEOPIXEL2_SEPARATE

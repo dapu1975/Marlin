@@ -810,7 +810,7 @@
 #ifdef Z2_DRIVER_TYPE
 //#define INVERT_Z2_VS_Z_DIR        // Z2 direction signal is the opposite of Z
 
-//#define Z_MULTI_ENDSTOPS          // Other Z axes have their own endstops
+#define Z_MULTI_ENDSTOPS // Other Z axes have their own endstops
 #if ENABLED(Z_MULTI_ENDSTOPS)
 #define Z2_USE_ENDSTOP _XMAX_   // Z2 endstop board plug. Don't forget to enable USE_*_PLUG.
 #define Z2_ENDSTOP_ADJUSTMENT 0 // Z2 offset relative to Y endstop
@@ -1533,7 +1533,7 @@
 #if ENABLED(POWER_LOSS_RECOVERY)
 #define PLR_ENABLED_DEFAULT false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
 //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
-//#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
+//#define POWER_LOSNEOPIXEL_LEDS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
 //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
 //#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
 //#define POWER_LOSS_PULLUP         // Set pullup / pulldown as appropriate for your sensor
