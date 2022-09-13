@@ -283,7 +283,7 @@
 #define THERMAL_PROTECTION_PERIOD 40    // Seconds
 #define THERMAL_PROTECTION_HYSTERESIS 4 // Degrees Celsius
 
-//#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
+//#define ADAPTIVE_FAN_SLOWING // Slow part cooling fan if temperature drops
 #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
 //#define NO_FAN_SLOWING_IN_PID_TUNING    // Don't slow fan speed during M303
 #endif
@@ -610,7 +610,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN FAN1_PIN
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -622,7 +622,7 @@
 #define COOLER_AUTO_FAN_PIN -1
 
 #define EXTRUDER_AUTO_FAN_TEMPERATURE 50
-#define EXTRUDER_AUTO_FAN_SPEED 255 // 255 == full speed
+#define EXTRUDER_AUTO_FAN_SPEED 127 // 255 == full speed
 #define CHAMBER_AUTO_FAN_TEMPERATURE 30
 #define CHAMBER_AUTO_FAN_SPEED 255
 #define COOLER_AUTO_FAN_TEMPERATURE 18
@@ -1339,7 +1339,7 @@
 //#define LCD_BACKLIGHT_TIMEOUT 30 // (s) Timeout before turning off the backlight
 
 #if HAS_BED_PROBE && EITHER(HAS_MARLINUI_MENU, HAS_TFT_LVGL_UI)
-//#define PROBE_OFFSET_WIZARD       // Add a Probe Z Offset calibration option to the LCD menu
+//#define PROBE_OFFSET_WIZARD // Add a Probe Z Offset calibration option to the LCD menu
 #if ENABLED(PROBE_OFFSET_WIZARD)
 /**
  * Enable to init the Probe Z-Offset when starting the Wizard.
@@ -1417,10 +1417,10 @@
 //#define LCD_DECIMAL_SMALL_XY
 
 // Add an 'M73' G-code to set the current percentage
-//#define LCD_SET_PROGRESS_MANUALLY
+#define LCD_SET_PROGRESS_MANUALLY
 
 // Show the E position (filament used) during printing
-//#define LCD_SHOW_E_TOTAL
+#define LCD_SHOW_E_TOTAL
 
 /**
  * LED Control Menu
@@ -1453,7 +1453,7 @@
 // LCD Print Progress options
 #if EITHER(SDSUPPORT, LCD_SET_PROGRESS_MANUALLY)
 #if CAN_SHOW_REMAINING_TIME
-//#define SHOW_REMAINING_TIME         // Display estimated time to completion
+#define SHOW_REMAINING_TIME // Display estimated time to completion
 #if ENABLED(SHOW_REMAINING_TIME)
 //#define USE_M73_REMAINING_TIME    // Use remaining time from M73 command instead of estimation
 //#define ROTATE_PROGRESS_DISPLAY   // Display (P)rogress, (E)lapsed, and (R)emaining time
@@ -1887,7 +1887,7 @@
 //#define LCD_LANGUAGE_3 de
 //#define LCD_LANGUAGE_4 es
 //#define LCD_LANGUAGE_5 it
-#ifdef LCD_LANGUAGE_2
+#ifdef LCD_LANGUAGE_3
 //#define LCD_LANGUAGE_AUTO_SAVE // Automatically save language to EEPROM on change
 #endif
 #endif
@@ -2032,10 +2032,10 @@
 //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
 #define BABYSTEP_INVERT_Z false // Change if Z babysteps should go the other way
 //#define BABYSTEP_MILLIMETER_UNITS       // Specify BABYSTEP_MULTIPLICATOR_(XY|Z) in mm instead of micro-steps
-#define BABYSTEP_MULTIPLICATOR_Z 1  // (steps or mm) Steps or millimeter distance for each Z babystep
+#define BABYSTEP_MULTIPLICATOR_Z 20 // (steps or mm) Steps or millimeter distance for each Z babystep
 #define BABYSTEP_MULTIPLICATOR_XY 1 // (steps or mm) Steps or millimeter distance for each XY babystep
 
-//#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
+#define DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
 #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
 #define DOUBLECLICK_MAX_INTERVAL 1250 // Maximum interval between clicks, in milliseconds.
                                       // Note: Extra time may be added to mitigate controller latency.
@@ -2047,10 +2047,10 @@
 
 //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-//#define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+#define BABYSTEP_ZPROBE_OFFSET // Combine M851 Z and Babystepping
 #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
 //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
-//#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
+//#define BABYSTEP_ZPROBE_GFX_OVERLAY // Enable graphical overlay on Z-offset editor
 #endif
 #endif
 
@@ -2610,14 +2610,14 @@
  *
  * Enable PARK_HEAD_ON_PAUSE to add the G-code M125 Pause and Park.
  */
-//#define ADVANCED_PAUSE_FEATURE
+#define ADVANCED_PAUSE_FEATURE
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
 #define PAUSE_PARK_RETRACT_FEEDRATE 60       // (mm/s) Initial retract feedrate.
 #define PAUSE_PARK_RETRACT_LENGTH 2          // (mm) Initial retract.
                                              // This short retract is done immediately, before parking the nozzle.
 #define FILAMENT_CHANGE_UNLOAD_FEEDRATE 10   // (mm/s) Unload filament feedrate. This can be pretty fast.
 #define FILAMENT_CHANGE_UNLOAD_ACCEL 25      // (mm/s^2) Lower acceleration may allow a faster feedrate.
-#define FILAMENT_CHANGE_UNLOAD_LENGTH 100    // (mm) The length of filament for a complete unload.
+#define FILAMENT_CHANGE_UNLOAD_LENGTH 420    // (mm) The length of filament for a complete unload.
                                              //   For Bowden, the full length of the tube and nozzle.
                                              //   For direct drive, the full length of the nozzle.
                                              //   Set to 0 for manual unloading.
@@ -2830,7 +2830,7 @@
 #define INTERPOLATE true
 
 #if AXIS_IS_TMC(X)
-#define X_CURRENT 800            // (mA) RMS current. Multiply by 1.414 for peak current.
+#define X_CURRENT 1000           // (mA) RMS current. Multiply by 1.414 for peak current.
 #define X_CURRENT_HOME X_CURRENT // (mA) RMS current for sensorless homing
 #define X_MICROSTEPS 16          // 0..256
 #define X_RSENSE 0.11
@@ -2850,7 +2850,7 @@
 #endif
 
 #if AXIS_IS_TMC(Y)
-#define Y_CURRENT 800
+#define Y_CURRENT 1000
 #define Y_CURRENT_HOME Y_CURRENT
 #define Y_MICROSTEPS 16
 #define Y_RSENSE 0.11
@@ -2870,7 +2870,7 @@
 #endif
 
 #if AXIS_IS_TMC(Z)
-#define Z_CURRENT 800
+#define Z_CURRENT 1000
 #define Z_CURRENT_HOME Z_CURRENT
 #define Z_MICROSTEPS 16
 #define Z_RSENSE 0.11
@@ -2880,7 +2880,7 @@
 #endif
 
 #if AXIS_IS_TMC(Z2)
-#define Z2_CURRENT 800
+#define Z2_CURRENT 1000
 #define Z2_CURRENT_HOME Z2_CURRENT
 #define Z2_MICROSTEPS Z_MICROSTEPS
 #define Z2_RSENSE 0.11
@@ -2970,7 +2970,7 @@
 #endif
 
 #if AXIS_IS_TMC(E0)
-#define E0_CURRENT 800
+#define E0_CURRENT 1200
 #define E0_MICROSTEPS 16
 #define E0_RSENSE 0.11
 #define E0_CHAIN_POS -1
@@ -3809,7 +3809,7 @@
  */
 
 // Custom Menu: Main Menu
-//#define CUSTOM_MENU_MAIN
+#define CUSTOM_MENU_MAIN
 #if ENABLED(CUSTOM_MENU_MAIN)
 //#define CUSTOM_MENU_MAIN_TITLE "Custom Commands"
 #define CUSTOM_MENU_MAIN_SCRIPT_DONE "M117 User Script Done"
@@ -3817,12 +3817,15 @@
 //#define CUSTOM_MENU_MAIN_SCRIPT_RETURN   // Return to status screen after a script
 #define CUSTOM_MENU_MAIN_ONLY_IDLE // Only show custom menu when the machine is idle
 
-#define MAIN_MENU_ITEM_1_DESC "Home & UBL Info"
-#define MAIN_MENU_ITEM_1_GCODE "G28\nG29 W"
+#define MAIN_MENU_ITEM_1_DESC "Unload Pos"
+#define MAIN_MENU_ITEM_1_GCODE "G90\nG0 X0\nG0 Y210"
+
+//#define MAIN_MENU_ITEM_1_DESC "Home & UBL Info"
+//#define MAIN_MENU_ITEM_1_GCODE "G28\nG29 W"
 //#define MAIN_MENU_ITEM_1_CONFIRM          // Show a confirmation dialog before this action
 
-#define MAIN_MENU_ITEM_2_DESC "Preheat for " PREHEAT_1_LABEL
-#define MAIN_MENU_ITEM_2_GCODE "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
+//#define MAIN_MENU_ITEM_2_DESC "Preheat for " PREHEAT_1_LABEL
+//#define MAIN_MENU_ITEM_2_GCODE "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
 //#define MAIN_MENU_ITEM_2_CONFIRM
 
 //#define MAIN_MENU_ITEM_3_DESC "Preheat for " PREHEAT_2_LABEL
@@ -3913,12 +3916,12 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
 //#define HOST_PAUSE_M76                // Tell the host to pause in response to M76
-//#define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
+#define HOST_PROMPT_SUPPORT // Initiate host prompts to get user feedback
 #if ENABLED(HOST_PROMPT_SUPPORT)
-//#define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
+#define HOST_STATUS_NOTIFICATIONS // Send some status messages to the host as notifications
 #endif
 //#define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start
 //#define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down
